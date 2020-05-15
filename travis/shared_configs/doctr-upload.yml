@@ -25,7 +25,7 @@ jobs:
           popd
         - |
           if [[ ! -z "$DOCTR_VERSIONS_MENU" ]]; then
-              DOCTR_VERSIONS_COMMAND='--command "doctr-versions-menu"'
+              DOCTR_VERSIONS_COMMAND='--command "doctr-versions-menu --no-downloads-file"'
           fi
         - DEPLOY_DIR="${TRAVIS_TAG:=master}"
       script:
