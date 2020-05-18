@@ -25,13 +25,13 @@ jobs:
           popd
         - |
           if [[ ! -z "$DOCTR_VERSIONS_MENU" ]]; then
-              DOCTR_VERSIONS_COMMAND='--command "doctr-versions-menu --no-downloads-file"'
+              DOCTR_COMMANDS=("--command" "'doctr-versions-menu --no-downloads-file'")
           fi
         - DEPLOY_DIR="${TRAVIS_TAG:=master}"
       script:
         - echo "$ doctr deploy --build-tags $DEPLOY_DIR --deploy-branch-name
-          gh-pages $DOCTR_VERSIONS_COMMAND"
+          gh-pages ${DOCTR_COMMANDS[@]}"
         - doctr deploy --build-tags $DEPLOY_DIR --deploy-branch-name gh-pages
-          $DOCTR_VERSIONS_COMMAND
+          "${DOCTR_COMMANDS[@]}"
       after_script:
         - set +e
