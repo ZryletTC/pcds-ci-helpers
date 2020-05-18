@@ -25,10 +25,12 @@ jobs:
           popd
         - |
           if [[ ! -z "$DOCTR_VERSIONS_MENU" ]]; then
-              DOCTR_COMMANDS=("--command" "'doctr-versions-menu --no-downloads-file'")
+              DOCTR_COMMANDS=("--command" "doctr-versions-menu --no-downloads-file")
           fi
         - DEPLOY_DIR="${TRAVIS_TAG:=master}"
       script:
+          # Doctr commands will look unquoted when echoed but should
+          # work properly when executed
         - echo "$ doctr deploy --build-tags $DEPLOY_DIR --deploy-branch-name
           gh-pages ${DOCTR_COMMANDS[@]}"
         - doctr deploy --build-tags $DEPLOY_DIR --deploy-branch-name gh-pages
